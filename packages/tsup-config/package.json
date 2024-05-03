@@ -1,0 +1,28 @@
+{
+  "name": "@mash-ui/tsup-config",
+  "module": "src/index.ts",
+  "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --max-warnings 0",
+    "prepack": "bun build"
+  },
+  "devDependencies": {
+    "@mash-ui/eslint-config": "*",
+    "@mash-ui/typescript-config": "*"
+  }
+}

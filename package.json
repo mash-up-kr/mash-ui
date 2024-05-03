@@ -1,0 +1,25 @@
+{
+  "name": "mash-ui",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@mash-ui/eslint-config": "*",
+    "@mash-ui/typescript-config": "*",
+    "prettier": "^3.2.5",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.1.6",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "packages/polee/*"
+  ]
+}

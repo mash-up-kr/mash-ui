@@ -1,0 +1,3 @@
+{
+  "extends": "@mash-ui/typescript-config/base.json"
+}

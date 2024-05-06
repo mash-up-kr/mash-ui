@@ -6,11 +6,17 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "vitest"
+    "test": "turbo test"
   },
   "devDependencies": {
     "@mash-ui/eslint-config": "*",
     "@mash-ui/typescript-config": "*",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.6",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
     "turbo": "latest",

@@ -5,14 +5,16 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "vitest"
   },
   "devDependencies": {
     "@mash-ui/eslint-config": "*",
     "@mash-ui/typescript-config": "*",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "^1.6.0"
   },
   "engines": {
     "node": ">=18"

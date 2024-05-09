@@ -29,6 +29,7 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "packages/polee/*"
+    "packages/polee/*",
+    "packages/baek2back/*"
   ]
 }

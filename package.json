@@ -30,6 +30,7 @@
     "apps/*",
     "packages/*",
     "packages/polee/*",
-    "packages/baek2back/*"
+    "packages/baek2back/*",
+    "packages/brightbong92/*"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@mash-ui/tsup-config",
-  "module": "src/index.ts",
+  "module": "./index.ts",
   "private": true,
   "sideEffects": false,
   "exports": {

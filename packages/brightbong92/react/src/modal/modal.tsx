@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import "./modal.css";
 
 export const Modal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // TEMP
   return (
     <>
       {/* Trigger/Open The Modal */}
-      <button id="myBtn" onClick={() => setIsOpen(true)}>
+      <button id="myBtn" data-testid="myBtn" onClick={() => setIsOpen(true)}>
         Open Modal
       </button>
 
@@ -20,10 +20,10 @@ export const Modal = () => {
       <div id="myModal" className={isOpen ? "show modal" : "no-show"}>
         {/* Modal content */}
         <div className="modal-content">
-          <span className="close" onClick={() => setIsOpen(false)}>
+          <span className="close" data-testid="closeBtn" onClick={() => setIsOpen(false)}>
             &times;
           </span>
-          <p>Some text in the Modal..</p>
+          {isOpen && <p>Some text in the Modal..</p>}
         </div>
       </div>
     </>

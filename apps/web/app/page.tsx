@@ -81,8 +81,7 @@ export default function Page(): JSX.Element {
       <Button appName="web" className={styles.button}>
         Click me!
       </Button>
-      <HiddenMessage />
-      
+      <HiddenMessage>message</HiddenMessage>
 
       <div className={styles.hero}>
         <div className={styles.heroContent}>

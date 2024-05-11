@@ -1,5 +1,7 @@
+"use client";
+
 // hidden-message.js
-import * as React from "react";
+import React from "react";
 
 // NOTE: React Testing Library works well with React Hooks and classes.
 // Your tests will be the same regardless of how you write your components.
@@ -8,7 +10,7 @@ interface HiddenMessageProps {
   children?: React.ReactNode;
 }
 
-function HiddenMessage({ children }: HiddenMessageProps) {
+export function HiddenMessage({ children }: HiddenMessageProps): JSX.Element {
   const [showMessage, setShowMessage] = React.useState(false);
   return (
     <div>
@@ -23,5 +25,3 @@ function HiddenMessage({ children }: HiddenMessageProps) {
     </div>
   );
 }
-
-export default HiddenMessage;

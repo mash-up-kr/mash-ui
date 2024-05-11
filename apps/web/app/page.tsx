@@ -3,6 +3,7 @@ import { Card } from '@polee/react-ui/card';
 import { Code } from '@polee/react-ui/code';
 import styles from './page.module.css';
 import { Button } from '@polee/react-ui/button';
+import { HiddenMessage } from '@brightbong92/react-ui';
 
 function Gradient({
   conic,
@@ -80,6 +81,8 @@ export default function Page(): JSX.Element {
       <Button appName="web" className={styles.button}>
         Click me!
       </Button>
+      <HiddenMessage />
+      
 
       <div className={styles.hero}>
         <div className={styles.heroContent}>

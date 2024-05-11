@@ -24,7 +24,7 @@
     "prepack": "bun build"
   },
   "devDependencies": {
-    "@mash-ui/eslint-config": "*",
-    "@mash-ui/typescript-config": "*"
+    "@mash-ui/eslint-config": "workspace:*",
+    "@mash-ui/typescript-config": "workspace:*"
   }
 }

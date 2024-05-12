@@ -2,6 +2,12 @@
 
 Mash-Up 14th, Web UI Library Study with testing
 
+## Installation
+
+```bash
+ bun install
+```
+
 ## Stack
 
 - [turborepo](https://turbo.build/repo)

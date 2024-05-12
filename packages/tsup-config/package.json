@@ -1,6 +1,8 @@
 {
   "name": "@mash-ui/tsup-config",
-  "module": "src/index.ts",
+  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "private": true,
   "sideEffects": false,
   "exports": {
@@ -22,7 +24,7 @@
     "prepack": "bun build"
   },
   "devDependencies": {
-    "@mash-ui/eslint-config": "*",
-    "@mash-ui/typescript-config": "*"
+    "@mash-ui/eslint-config": "workspace:*",
+    "@mash-ui/typescript-config": "workspace:*"
   }
 }

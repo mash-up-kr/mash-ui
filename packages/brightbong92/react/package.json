@@ -10,9 +10,9 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@mash-ui/eslint-config": "*",
-    "@mash-ui/typescript-config": "*",
-    "@mash-ui/tsup-config": "*",
+    "@mash-ui/eslint-config": "workspace:*",
+    "@mash-ui/typescript-config": "workspace:*",
+    "@mash-ui/tsup-config": "workspace:*",
     "@types/node": "^20.11.24",
     "@types/eslint": "^8.56.5",
     "@types/react": "^18.2.61",

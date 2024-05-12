@@ -9,8 +9,8 @@
     "test": "turbo test"
   },
   "devDependencies": {
-    "@mash-ui/eslint-config": "*",
-    "@mash-ui/typescript-config": "*",
+    "@mash-ui/eslint-config": "workspace:*",
+    "@mash-ui/typescript-config": "workspace:*",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "^14.5.2",

@@ -5,7 +5,7 @@ import { options } from '@mash-ui/tsup-config';
 
 const tsupOptions: Options = {
   ...options,
-  name: '@polee/react-ui',
+  name: '@baek2back/react-ui',
 };
 
 export default defineConfig(tsupOptions);

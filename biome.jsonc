@@ -2,7 +2,7 @@
     // configuration docs - https://biomejs.dev/reference/configuration/
 
 	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
-    // || "$schema": "./node_modules/@biomejs/biome/configuration_schema.json"
+    // || "./node_modules/@biomejs/biome/configuration_schema.json"
 
     // import sorting docs -  https://biomejs.dev/analyzer/import-sorting/
 	"organizeImports": { 
@@ -12,7 +12,7 @@
     "linter": {
         "ignore":["apps/web/**", "apps/docs/**"]
     },
-    
+
     "formatter": {
         "ignore":["apps/web/**", "apps/docs/**"]
     },

@@ -9,7 +9,6 @@
     "test": "turbo test"
   },
   "devDependencies": {
-    "@mash-ui/biome-config":"workspace:*",
     "@mash-ui/eslint-config": "workspace:*",
     "@mash-ui/typescript-config": "workspace:*",
     "@testing-library/jest-dom": "^6.4.5",

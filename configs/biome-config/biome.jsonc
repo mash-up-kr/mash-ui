@@ -6,21 +6,27 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": false,
+			"style": {
+				"noVar":"error"
+			}
 		}
 	},
 	"formatter": {
 		"enabled": true,
 		"lineWidth": 100
 	},
-	"overrides": [{
-		"include": ["apps/web/**"],
-		"linter": {
-		  "rules": {
-			"suspicious": {
-			  "noConsoleLog": "off"
-			}
-		  }
-		}
-	}]
+	"files": {
+		"ignore": ["dist/**"]
+	}
+	// "overrides": [{
+	// 	"include": ["apps/my-app/**"],
+	// 	"linter": {
+	// 	  "rules": {
+	// 		"suspicious": {
+	// 		  "noConsoleLog": "off"
+	// 		}
+	// 	  }
+	// 	}
+	// }]
 }

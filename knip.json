@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "packages/*": {
+      "entry": ["src/index.{js,ts,tsx}"]
+    },
+    "apps/*": {
+      "entry": ["src/index.{js,ts,tsx}", "app/{layout,page}.tsx"]
+    },
+    "configs/tsup-config": {
+      "entry": ["src/index.{js,ts,tsx}"]
+    }
+  }
+}

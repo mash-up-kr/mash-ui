@@ -7,7 +7,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "knip": "knip"
+    "test:knip": "knip"
   },
   "devDependencies": {
     "@mash-ui/eslint-config": "workspace:*",

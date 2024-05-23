@@ -1,24 +1,20 @@
 {
-  "name": "@brightbong92/react-ui",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "main": "./src/index.ts",
-  "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "build": "tsup",
-    "test": "vitest run"
-  },
-  "devDependencies": {
-    "@mash-ui/eslint-config": "workspace:*",
-    "@mash-ui/typescript-config": "workspace:*",
-    "@mash-ui/tsup-config": "workspace:*",
-    "@types/node": "^20.11.24",
-    "@types/eslint": "^8.56.5",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "eslint": "^8.57.0",
-    "react": "^18.2.0",
-    "typescript": "^5.3.3"
-  }
+	"name": "@brightbong92/react-ui",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "./src/index.ts",
+	"scripts": {
+		"build": "tsup",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@mash-ui/typescript-config": "workspace:*",
+		"@mash-ui/tsup-config": "workspace:*",
+		"@types/node": "^20.11.24",
+		"@types/react": "^18.2.61",
+		"@types/react-dom": "^18.2.19",
+		"react": "^18.2.0",
+		"typescript": "^5.3.3"
+	}
 }

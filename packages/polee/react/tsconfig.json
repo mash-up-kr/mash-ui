@@ -1,9 +1,9 @@
 {
-  "extends": "@mash-ui/typescript-config/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "types": ["vitest/globals"]
-  },
-  "include": ["src", ".eslintrc.cjs", "tsup.config.ts", "vitest.config.ts", "vitest-setup.ts"],
-  "exclude": ["node_modules", "dist"]
+	"extends": "@mash-ui/typescript-config/react-library.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"types": ["vitest/globals"]
+	},
+	"include": ["src", "tsup.config.ts", "vitest.config.ts", "vitest-setup.ts"],
+	"exclude": ["node_modules", "dist"]
 }

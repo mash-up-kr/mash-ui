@@ -1,0 +1,20 @@
+{
+	"files.autoSave": "off",
+	"workbench.editor.enablePreview": true,
+	"workbench.editor.highlightModifiedTabs": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit",
+		"source.organizeImports": "explicit"
+	}
+}

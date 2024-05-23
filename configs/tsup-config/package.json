@@ -1,30 +1,29 @@
 {
-  "name": "@mash-ui/tsup-config",
-  "module": "./dist/index.js",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "private": true,
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
-  },
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "lint": "eslint . --max-warnings 0",
-    "prepack": "bun build"
-  },
-  "devDependencies": {
-    "@mash-ui/eslint-config": "workspace:*",
-    "@mash-ui/typescript-config": "workspace:*"
-  }
+	"name": "@mash-ui/tsup-config",
+	"module": "./dist/index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"private": true,
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		}
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"lint": "eslint . --max-warnings 0",
+		"prepack": "bun build"
+	},
+	"devDependencies": {
+		"@mash-ui/typescript-config": "workspace:*"
+	}
 }

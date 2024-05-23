@@ -120,6 +120,7 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </div>
+
     </main>
   );
 }

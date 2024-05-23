@@ -9,7 +9,6 @@
 		"./code": "./src/code.tsx"
 	},
 	"scripts": {
-		"lint": "eslint . --max-warnings 0",
 		"build": "tsup",
 		"test": "vitest run"
 	},

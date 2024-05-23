@@ -1,4 +1,27 @@
-import { forwardRef, useState } from "react";
+import { type ComponentPropsWithoutRef, forwardRef, useRef } from "react";
+import { useLockBodyScroll } from "../../utils/use-lock-body-scroll";
+import { Portal } from "../portal";
+import { useControllableState } from "../../utils/use-controllable-state";
+import { useClickOutside } from "../../utils/use-click-outside";
+import { mergeRefs } from "../../utils/merge-refs";
+import { useKeyStroke } from "../../utils/use-key-stroke";
+
+const Backdrop = (props: ComponentPropsWithoutRef<"div">) => {
+  return (
+    <div
+      {...props}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: Number.MAX_SAFE_INTEGER - 1,
+        ...props.style,
+      }}
+    />
+  );
+};
 
 export interface ModalProps {
   isOpen?: boolean;
@@ -6,28 +29,57 @@ export interface ModalProps {
 }
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
-  const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const [isOpen, setIsOpen] = useControllableState({
+    value: props.isOpen,
+    onChange: props.onOpenChange,
+    defaultValue: false,
+  });
+
+  useLockBodyScroll({ locked: isOpen });
+
+  useClickOutside(
+    modalRef,
+    () => {
+      setIsOpen(false);
+    },
+    { event: "mousedown" }
+  );
+
+  useKeyStroke(["Escape"], (event) => {
+    setIsOpen(false);
+  });
+
+  if (!isOpen) return null;
 
   return (
-    isOpen && (
+    <Portal>
+      <Backdrop />
       <div
-        ref={ref}
-        aria-modal={isOpen && "true"}
         role="dialog"
+        ref={mergeRefs([ref, modalRef])}
+        aria-modal="true"
         aria-labelledby="header"
         aria-describedby="body"
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: Number.MAX_SAFE_INTEGER,
+        }}
       >
         <span id="header">Modal header</span>
         <span id="body">Modal body</span>
         <button
           onClick={() => {
             setIsOpen(false);
-            props.onOpenChange?.(false);
           }}
         >
           Close
         </button>
       </div>
-    )
+    </Portal>
   );
 });

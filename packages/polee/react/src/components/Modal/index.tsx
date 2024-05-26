@@ -1,92 +1,140 @@
-import { type ReactNode, useEffect, useRef } from 'react';
+import type { ReactNode, ForwardedRef, CSSProperties, RefObject } from 'react';
+import { useEffect, forwardRef, useId, useMemo, useRef, useCallback } from 'react';
 
-const modalRoot = document.getElementById('modal-root') || document.createElement('div');
-if (!document.getElementById('modal-root')) {
-  modalRoot.id = 'modal-root';
-  document.body.appendChild(modalRoot);
-}
+import Portal from './Portal';
+import useAnimation from '../../hooks/useAnimation';
+import useEventListener from '../../hooks/useEventListener';
+import type { CustomAnimation, EnterAnimation, ExitAnimation } from '../../hooks/useAnimation';
+import { mergeRefs } from '../../utils/mergeRef';
 
-const modalRegistry: Record<string, { container: HTMLDivElement }> = {};
-
-export interface ModalShowOption {
-  shouldCloseOnOverlayClick?: boolean;
-  shouldCloseOnEsc?: boolean;
-}
-
-export type ModalAnimationType =
-  | 'fade-in'
-  | 'fade-out'
-  | 'slide-up'
-  | 'slide-down'
-  | 'fade-in-slide-up'
-  | 'fade-in-slide-down'
-  | 'fade-out-slide-up'
-  | 'fade-out-slide-down';
-
-export interface ModalProps extends ModalShowOption {
-  content: ReactNode;
+interface ModalProps {
+  children: ReactNode;
   onClose: VoidFunction;
-  enterAnimation?: ModalAnimationType;
-  exitAnimation?: Omit<ModalAnimationType, 'fade-in' | 'fade-in-slide-up' | 'fade-in-slide-down'>;
+  isOpen: boolean;
+  dim?: boolean;
+  dimStyle?: CSSProperties;
+  shouldCloseOnDimClick?: boolean;
+  enterAnimation?: EnterAnimation;
+  exitAnimation?: ExitAnimation;
+  preventBackgroundScroll?: boolean;
+  shouldCloseOnEsc?: boolean;
+  animationDuration?: string | number;
+  slideAnimationDistance?: string;
+  mountNode?: RefObject<HTMLElement>;
+  customAnimations?: {
+    enter?: CustomAnimation;
+    exit?: CustomAnimation;
+  };
+  ariaLabelledby?: string;
+  ariaDescribedby?: string;
 }
 
-export function Modal({
-  content,
-  onClose,
-  shouldCloseOnOverlayClick,
-  shouldCloseOnEsc,
-}: ModalProps) {
+const getDimStyle = (dimStyle?: CSSProperties): CSSProperties => ({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: -1,
+  ...dimStyle,
+});
+
+const Modal = forwardRef((props: ModalProps, ref: ForwardedRef<HTMLDivElement>) => {
+  const {
+    children,
+    onClose,
+    dimStyle,
+    isOpen,
+    enterAnimation,
+    exitAnimation,
+    animationDuration,
+    slideAnimationDistance,
+    customAnimations,
+    ariaLabelledby,
+    ariaDescribedby,
+    mountNode,
+    dim = true,
+    preventBackgroundScroll = true,
+    shouldCloseOnDimClick = true,
+    shouldCloseOnEsc = true,
+  } = props;
   const modalRef = useRef<HTMLDivElement>(null);
 
+  const portalId = useId();
+
+  useEventListener('keydown', (event: KeyboardEvent) => {
+    if (shouldCloseOnEsc && event.key === 'Escape') {
+      onClose();
+    }
+  });
+
+  useAnimation({
+    ref: modalRef,
+    enterAnimation: customAnimations?.enter ? 'custom-enter' : enterAnimation,
+    exitAnimation: customAnimations?.exit ? 'custom-exit' : exitAnimation,
+    animationDuration,
+    slideAnimationDistance,
+    customAnimations,
+  });
+
   useEffect(() => {
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    if (shouldCloseOnEsc) {
-      // esc
+    if (preventBackgroundScroll && isOpen) {
+      document.body.style.overflow = 'hidden';
     }
 
-    if (shouldCloseOnOverlayClick) {
-      // dim close
+    return () => {
+      if (preventBackgroundScroll) {
+        document.body.style.overflow = '';
+      }
+    };
+  }, [preventBackgroundScroll, isOpen]);
+
+  const handleDimClick = useCallback(() => {
+    if (shouldCloseOnDimClick) {
+      onClose();
     }
-  }, [onClose, shouldCloseOnOverlayClick, shouldCloseOnEsc]);
+  }, [onClose, shouldCloseOnDimClick]);
+
+  const mergedDimStyle = useMemo(() => getDimStyle(dimStyle), [dimStyle]);
+
+  const modalStyle = useMemo(() => {
+    const styles: CSSProperties = {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 9996,
+    };
+    return styles;
+  }, []);
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
-    <div
-      ref={modalRef}
-      role="dialog"
-      aria-modal="true"
-      tabIndex={-1}
-      aria-labelledby={'팝업'}
-      aria-describedby={'팝업에 대한 설명'}
-      onClick={() => {
-        if (shouldCloseOnOverlayClick) onClose();
-      }}
-    >
-      <div onClick={(e) => e.stopPropagation()}>{content}</div>
-    </div>
+    <Portal id={portalId} containerRef={mountNode}>
+      <div
+        ref={mergeRefs([modalRef, ref])}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
+        aria-labelledby={ariaLabelledby}
+        aria-describedby={ariaDescribedby}
+        style={modalStyle}
+      >
+        {dim && <div style={mergedDimStyle} onClick={handleDimClick} />}
+        {children}
+      </div>
+    </Portal>
   );
-}
+});
 
-export function show(content: ReactNode, options?: ModalShowOption) {
-  const container = document.createElement('div');
-  const modalId = Math.random().toString(36).slice(2);
+Modal.displayName = 'Modal';
 
-  const onClose = () => {
-    hide(modalId);
-  };
-
-  modalRoot.appendChild(container);
-
-  modalRegistry[modalId] = { container };
-  return modalId;
-}
-
-export function hide(modalId: string) {
-  const modalInfo = modalRegistry[modalId];
-
-  if (modalInfo && modalInfo.container.parentNode) {
-    modalInfo.container.parentNode.removeChild(modalInfo.container);
-    Reflect.deleteProperty(modalRegistry, modalId);
-  }
-}
+export default Modal;

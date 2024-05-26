@@ -136,8 +136,6 @@ const useAnimation = ({
 
     if (!element) return;
 
-    element.classList.add('overlay');
-
     if (enterAnimation) {
       element.classList.add(enterAnimation);
       if (exitAnimation) element.classList.remove(exitAnimation);

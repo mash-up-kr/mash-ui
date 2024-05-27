@@ -12,7 +12,7 @@ export const Portal = ({
   container,
   disabled,
 }: PropsWithChildren<PortalProps>) => {
-  const isServer = useIsServer()
+  const isServer = useIsServer();
 
   if (isServer || disabled) return <>{children}</>;
 

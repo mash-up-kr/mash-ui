@@ -2,8 +2,8 @@ import { describe, expect, it, vi } from "vitest";
 
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Modal } from "..";
 import React from "react";
+import { Modal } from "..";
 
 describe("Modal", () => {
   it("should render correctly", () => {

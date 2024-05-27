@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { useRef } from "react";
-import { Portal, type PortalProps } from "./portal";
 import { describe, expect, it } from "vitest";
+import { Portal, type PortalProps } from "./portal";
 
 const PortalWithContainerTest = ({
   disabled,

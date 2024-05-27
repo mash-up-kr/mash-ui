@@ -1,23 +1,23 @@
 import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
 
 interface UseLockBodyScrollProps {
-  locked?: boolean;
+	locked?: boolean;
 }
 
 export const useLockBodyScroll = ({
-  locked = true,
+	locked = true,
 }: UseLockBodyScrollProps) => {
-  useIsomorphicLayoutEffect(() => {
-    const originalStyle = document.body.style.getPropertyValue("overflow");
+	useIsomorphicLayoutEffect(() => {
+		const originalStyle = document.body.style.getPropertyValue("overflow");
 
-    if (locked) {
-      document.body.style.setProperty("overflow", "hidden");
-    }
+		if (locked) {
+			document.body.style.setProperty("overflow", "hidden");
+		}
 
-    return () => {
-      if (locked) {
-        document.body.style.setProperty("overflow", originalStyle);
-      }
-    };
-  }, [locked]);
+		return () => {
+			if (locked) {
+				document.body.style.setProperty("overflow", originalStyle);
+			}
+		};
+	}, [locked]);
 };

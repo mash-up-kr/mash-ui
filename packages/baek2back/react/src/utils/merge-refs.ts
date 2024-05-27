@@ -1,4 +1,4 @@
-import type { MutableRefObject, LegacyRef, RefCallback } from "react";
+import type { LegacyRef, MutableRefObject, RefCallback } from "react";
 
 /**
  * @example
@@ -10,15 +10,15 @@ import type { MutableRefObject, LegacyRef, RefCallback } from "react";
  */
 
 export function mergeRefs<T = any>(
-  refs: (MutableRefObject<T> | LegacyRef<T>)[]
+	refs: (MutableRefObject<T> | LegacyRef<T>)[],
 ): RefCallback<T> {
-  return (value) => {
-    refs.forEach((ref) => {
-      if (typeof ref === "function") {
-        ref(value);
-      } else if (ref) {
-        (ref as MutableRefObject<T | null>).current = value;
-      }
-    });
-  };
+	return (value) => {
+		refs.forEach((ref) => {
+			if (typeof ref === "function") {
+				ref(value);
+			} else if (ref) {
+				(ref as MutableRefObject<T | null>).current = value;
+			}
+		});
+	};
 }

@@ -1,10 +1,10 @@
-import { type ComponentPropsWithoutRef, forwardRef, useRef } from "react";
+import { forwardRef, useRef, type ComponentPropsWithoutRef } from "react";
+import { mergeRefs } from "../../utils/merge-refs";
+import { useClickOutside } from "../../utils/use-click-outside";
+import { useControllableState } from "../../utils/use-controllable-state";
+import { useKeyStroke } from "../../utils/use-key-stroke";
 import { useLockBodyScroll } from "../../utils/use-lock-body-scroll";
 import { Portal } from "../portal";
-import { useControllableState } from "../../utils/use-controllable-state";
-import { useClickOutside } from "../../utils/use-click-outside";
-import { mergeRefs } from "../../utils/merge-refs";
-import { useKeyStroke } from "../../utils/use-key-stroke";
 
 const Backdrop = (props: ComponentPropsWithoutRef<"div">) => {
   return (

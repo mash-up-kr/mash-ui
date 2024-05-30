@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import "./modal.css";
 
 type ModalProps = {};
 
-export const Modal = () => {
+const Modal = forwardRef<HTMLDivElement, ModalProps>(({ ...props }, ref) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const modalRef = useRef<HTMLDivElement>(null);
+
 	return (
 		<>
 			{/* Trigger/Open The Modal */}
@@ -68,4 +70,6 @@ export const Modal = () => {
 			</div>
 		</>
 	);
-};
+});
+
+export default Modal;

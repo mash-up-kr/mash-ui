@@ -1,4 +1,4 @@
-import { Modal } from "@brightbong92/react-ui";
+import Modal from "@brightbong92/react-ui/src/modal";
 import Image from "next/image";
 import styles from "./page.module.css";
 

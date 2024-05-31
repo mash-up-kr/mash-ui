@@ -4,14 +4,14 @@ import { forwardRef, useEffect, useRef } from "react";
 import { mergeRefs } from "../utils/mergeRef";
 import "./modal.css";
 
-type ModalProps = {
+export type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onOpen?: () => void;
   closeOutsideClick?: boolean;
 };
 
-const Modal = forwardRef<HTMLDivElement, ModalProps>(
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ isOpen, onClose, onOpen, closeOutsideClick = false, ...props }, ref) => {
     const modalRef = useRef<HTMLDivElement>();
 
@@ -83,5 +83,3 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
   }
 );
-
-export default Modal;

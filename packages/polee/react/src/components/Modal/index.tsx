@@ -1,13 +1,13 @@
-import type { ReactNode, ForwardedRef, CSSProperties, RefObject } from 'react';
-import { useEffect, forwardRef, useId, useMemo, useRef, useCallback } from 'react';
+import type { CSSProperties, ForwardedRef, ReactNode, RefObject } from 'react';
+import { forwardRef, useCallback, useEffect, useId, useMemo, useRef } from 'react';
 
-import Portal from './Portal';
+import type { CustomAnimation, EnterAnimation, ExitAnimation } from '../../hooks/useAnimation';
 import useAnimation from '../../hooks/useAnimation';
 import useEventListener from '../../hooks/useEventListener';
-import type { CustomAnimation, EnterAnimation, ExitAnimation } from '../../hooks/useAnimation';
 import { mergeRefs } from '../../utils/mergeRef';
+import Portal from './Portal';
 
-interface ModalProps {
+export interface ModalProps {
   children: ReactNode;
   onClose: VoidFunction;
   isOpen: boolean;

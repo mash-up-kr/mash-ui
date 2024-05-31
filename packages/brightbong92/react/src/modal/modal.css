@@ -7,7 +7,7 @@
 }
 
 /* Modal background */
-.background {
+.dimmed {
   position: fixed; /* Stay in place */
   z-index: 99; /* Sit on top */
   left: 0;
@@ -33,20 +33,41 @@
   background-color: #fefefe;
   color: #000;
   margin: auto;
-  padding: 80px;
   border: 1px solid #888;
   width: 100%;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 15px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* The Close Button */
 .close {
   color: #aaaaaa;
-  float: right;
+  /* float: right; */
   font-size: 28px;
   font-weight: bold;
-  position: absolute;
-  right: 20px;
-  top: 20px;
+  /* position: absolute; */
+  /* right: 20px; */
+  /* top: 20px; */
 }
 
 .close:hover,

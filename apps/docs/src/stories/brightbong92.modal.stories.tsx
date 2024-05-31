@@ -23,7 +23,7 @@ export const Primary: Story = {
       <>
         <button
           onClick={() => {
-            updateArgs({ isOpen: !isOpen });
+            updateArgs({ isOpen: true });
           }}
         >
           Open Modal
@@ -32,7 +32,7 @@ export const Primary: Story = {
           {...props}
           isOpen={isOpen}
           onClose={() => {
-            updateArgs({ isOpen: !isOpen });
+            updateArgs({ isOpen: false });
           }}
         />
       </>

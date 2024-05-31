@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef, useRef } from "react";
+import Portal from "../portal/portal";
 import { mergeRefs } from "../utils/mergeRef";
 import useOnExit from "./hooks/useOnExit";
 import "./modal.css";
@@ -21,9 +22,10 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     if (!isOpen) return;
 
     return (
-      <>
+      <Portal id="sunflower">
         {/* Modal background dimmed */}
         <div
+          data-testid="dimmed"
           className={"dimmed show"}
           onClick={closeOutsideClick ? onClose : undefined}
         />
@@ -70,7 +72,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             </div>
           )}
         </div>
-      </>
+      </Portal>
     );
   }
 );

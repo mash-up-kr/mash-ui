@@ -11,9 +11,9 @@ const useOnExit = ({ callback }: UseOnExitProps) => {
         callback();
       }
     };
-    window.addEventListener("keyup", onEsc);
+    window.addEventListener("keydown", onEsc);
     return () => {
-      window.removeEventListener("keyup", onEsc);
+      window.removeEventListener("keydown", onEsc);
     };
   }, []);
   return;

@@ -34,6 +34,7 @@ export const Primary: Story = {
           onClose={() => {
             updateArgs({ isOpen: false });
           }}
+          closeOutsideClick
         />
       </>
     );

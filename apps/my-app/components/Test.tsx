@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "@brightbong92/react-ui/src/modal";
+import { Modal } from "@brightbong92/react-ui";
 import { useState } from "react";
 
 const Test = () => {

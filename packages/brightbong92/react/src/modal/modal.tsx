@@ -1,31 +1,22 @@
 "use client";
 
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useRef } from "react";
 import { mergeRefs } from "../utils/mergeRef";
+import useOnExit from "./hooks/useOnExit";
 import "./modal.css";
 
-type ModalProps = {
+export type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onOpen?: () => void;
   closeOutsideClick?: boolean;
 };
 
-const Modal = forwardRef<HTMLDivElement, ModalProps>(
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ isOpen, onClose, onOpen, closeOutsideClick = false, ...props }, ref) => {
     const modalRef = useRef<HTMLDivElement>();
 
-    useEffect(() => {
-      const onEsc = (ev: KeyboardEvent) => {
-        if (ev.key === "Escape") {
-          onClose();
-        }
-      };
-      window.addEventListener("keyup", onEsc);
-      return () => {
-        window.removeEventListener("keyup", onEsc);
-      };
-    }, []);
+    useOnExit({ callback: onClose });
 
     if (!isOpen) return;
 
@@ -83,5 +74,3 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
   }
 );
-
-export default Modal;

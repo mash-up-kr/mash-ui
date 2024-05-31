@@ -7,7 +7,7 @@
 }
 
 /* Modal background */
-.background {
+.dimmed {
   position: fixed; /* Stay in place */
   z-index: 99; /* Sit on top */
   left: 0;

@@ -1,9 +1,10 @@
 import { fireEvent, render } from "@testing-library/react";
 import { useRef, useState } from "react";
 import { expect, test } from "vitest";
-import Modal from "../modal";
+import { Modal } from "../modal/modal";
 
-const queryByTextRegex = /Lorem ipsum dolor sit amet consectetur adipisicing elit./i;
+const queryByTextRegex =
+  /Lorem ipsum dolor sit amet consectetur adipisicing elit./i;
 const openModalBtnIdRegex = /openModalBtn/i;
 
 const TestComponent = ({ closeOutsideClick = false }) => {
@@ -13,8 +14,14 @@ const TestComponent = ({ closeOutsideClick = false }) => {
 
   return (
     <>
-      <button data-testid="openModalBtn" onClick={handleOpen}>Open Modal</button>
-      <Modal isOpen={isOpen} onClose={handleClose} closeOutsideClick={closeOutsideClick} />
+      <button data-testid="openModalBtn" onClick={handleOpen}>
+        Open Modal
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={handleClose}
+        closeOutsideClick={closeOutsideClick}
+      />
     </>
   );
 };
@@ -63,7 +70,9 @@ test("forwardRef가 제대로 전달되는지", () => {
 
     return (
       <>
-        <button data-testid="openModalBtn" onClick={handleOpen}>Open Modal</button>
+        <button data-testid="openModalBtn" onClick={handleOpen}>
+          Open Modal
+        </button>
         <Modal ref={modalRef} isOpen={isOpen} onClose={handleClose} />
         <button
           onClick={() => {
@@ -102,28 +111,31 @@ test("ESC 키를 눌렀을 때 모달이 닫히는지", () => {
 });
 
 test("dimmed 배경을 클릭하면 모달이 닫히는지 (closeOutsideClick=true)", () => {
-  const { getByTestId, queryByText, container } = render(<TestComponent closeOutsideClick={true} />);
+  const { getByTestId, queryByText, container } = render(
+    <TestComponent closeOutsideClick={true} />
+  );
   const openButton = getByTestId(openModalBtnIdRegex);
 
   fireEvent.click(openButton);
   expect(queryByText(queryByTextRegex)).toBeInTheDocument();
 
   const dimmedBackground = container.querySelector(".dimmed");
-  if(dimmedBackground) fireEvent.click(dimmedBackground);
+  if (dimmedBackground) fireEvent.click(dimmedBackground);
 
   expect(queryByText(queryByTextRegex)).not.toBeInTheDocument();
 });
 
 test("dimmed 배경을 클릭해도 모달이 닫히지 않는지 (closeOutsideClick=false)", () => {
-  const { getByTestId, queryByText, container } = render(<TestComponent closeOutsideClick={false} />);
+  const { getByTestId, queryByText, container } = render(
+    <TestComponent closeOutsideClick={false} />
+  );
   const openButton = getByTestId(openModalBtnIdRegex);
 
   fireEvent.click(openButton);
   expect(queryByText(queryByTextRegex)).toBeInTheDocument();
 
   const dimmedBackground = container.querySelector(".dimmed");
-  if(dimmedBackground) fireEvent.click(dimmedBackground);
+  if (dimmedBackground) fireEvent.click(dimmedBackground);
 
   expect(queryByText(queryByTextRegex)).toBeInTheDocument();
 });
-

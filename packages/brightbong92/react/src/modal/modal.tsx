@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef, useRef } from "react";
+import Portal from "../portal/portal";
 import { mergeRefs } from "../utils/mergeRef";
 import useOnExit from "./hooks/useOnExit";
 import "./modal.css";
@@ -21,7 +22,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     if (!isOpen) return;
 
     return (
-      <>
+      <Portal>
         {/* Modal background dimmed */}
         <div
           className={"dimmed show"}
@@ -70,7 +71,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
             </div>
           )}
         </div>
-      </>
+      </Portal>
     );
   }
 );

@@ -1,13 +1,17 @@
-import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Modal } from '../components';
+
+const noop = () => {
+  alert('modal');
+};
 
 describe('Modal Component', () => {
   it('should display Modal correctly', async () => {
     render(
-      <Modal isOpen onClose={() => {}}>
+      <Modal isOpen onClose={noop}>
         Test-Modal
       </Modal>
     );
@@ -20,7 +24,9 @@ describe('Modal Component', () => {
       const [isOpen, setIsOpen] = React.useState(true);
       return (
         <div>
-          <button onClick={() => setIsOpen(!isOpen)}>Toggle-Modal-Button</button>
+          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+            Toggle-Modal-Button
+          </button>
           <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
             Toggle-Modal
           </Modal>
@@ -38,7 +44,7 @@ describe('Modal Component', () => {
   it('ref should be forwarded', () => {
     const ref = React.createRef<HTMLDivElement>();
     render(
-      <Modal ref={ref} isOpen onClose={() => {}}>
+      <Modal ref={ref} isOpen onClose={noop}>
         Modal-Ref-Test
       </Modal>
     );
@@ -51,7 +57,9 @@ describe('Modal Component', () => {
       const [isOpen, setIsOpen] = React.useState(true);
       return (
         <div>
-          <button onClick={() => setIsOpen(!isOpen)}>Toggle-Modal-Button</button>
+          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+            Toggle-Modal-Button
+          </button>
           <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} preventBackgroundScroll>
             Toggle-Modal
           </Modal>
@@ -71,7 +79,9 @@ describe('Modal Component', () => {
       const [isOpen, setIsOpen] = React.useState(true);
       return (
         <div>
-          <button onClick={() => setIsOpen(!isOpen)}>Toggle-Modal-Button</button>
+          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+            Toggle-Modal-Button
+          </button>
           <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} preventBackgroundScroll={false}>
             Toggle-Modal
           </Modal>
@@ -93,7 +103,7 @@ describe('Modal Component', () => {
     render(
       <Modal
         isOpen
-        onClose={() => {}}
+        onClose={noop}
         ariaLabelledby={ariaLabelledby}
         ariaDescribedby={ariaDescribedby}
       >
@@ -116,7 +126,9 @@ describe('Modal Component', () => {
       const [isOpen, setIsOpen] = React.useState(true);
       return (
         <div>
-          <button onClick={() => setIsOpen(!isOpen)}>Toggle Modal</button>
+          <button type="button" onClick={() => setIsOpen(!isOpen)}>
+            Toggle Modal
+          </button>
           <Modal
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}

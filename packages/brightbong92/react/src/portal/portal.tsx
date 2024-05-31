@@ -5,15 +5,16 @@ import { createPortal } from "react-dom";
 interface PortalProps {
   children: React.ReactNode;
   id?: string;
+  className?: string;
 }
 
-const Portal = ({ id, children }: PortalProps): JSX.Element => {
+const Portal = ({ id, className, children }: PortalProps): JSX.Element => {
   const elRef = useRef<HTMLDivElement | null>(null);
 
   if (!elRef.current) {
     elRef.current = document.createElement("div");
     elRef.current.setAttribute("id", id ?? "root-modal");
-    elRef.current.setAttribute("class", id ?? "root-modal");
+    elRef.current.setAttribute("class", className ?? "root-modal");
   }
 
   useEffect(() => {

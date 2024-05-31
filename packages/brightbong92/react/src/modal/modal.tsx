@@ -22,7 +22,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     if (!isOpen) return;
 
     return (
-      <Portal>
+      <Portal id="sunflower">
         {/* Modal background dimmed */}
         <div
           className={"dimmed show"}

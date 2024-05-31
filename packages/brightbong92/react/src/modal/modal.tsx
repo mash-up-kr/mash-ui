@@ -17,13 +17,14 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
     useEffect(() => {
       const onEsc = (ev: KeyboardEvent) => {
+        console.log("key", ev.key);
         if (ev.key === "Escape") {
           onClose();
         }
       };
-      window.addEventListener("keyup", onEsc);
+      window.addEventListener("keydown", onEsc);
       return () => {
-        window.removeEventListener("keyup", onEsc);
+        window.removeEventListener("keydown", onEsc);
       };
     }, []);
 

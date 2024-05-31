@@ -18,9 +18,9 @@ const Portal = ({ id, className, children }: PortalProps): JSX.Element => {
   }
 
   useEffect(() => {
-    if (elRef.current) document.body.appendChild(elRef.current);
+    document.body.appendChild(elRef.current || document.createElement("div"));
     return () => {
-      if (elRef.current) document.body.removeChild(elRef.current);
+      document.body.removeChild(elRef.current || document.createElement("div"));
     };
   }, []);
 

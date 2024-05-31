@@ -25,6 +25,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       <Portal id="sunflower">
         {/* Modal background dimmed */}
         <div
+          data-testid="dimmed"
           className={"dimmed show"}
           onClick={closeOutsideClick ? onClose : undefined}
         />

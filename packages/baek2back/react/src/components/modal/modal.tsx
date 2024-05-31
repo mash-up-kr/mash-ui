@@ -17,6 +17,7 @@ const Backdrop = (props: ComponentPropsWithoutRef<"div">) => {
         right: 0,
         bottom: 0,
         zIndex: Number.MAX_SAFE_INTEGER - 1,
+        backgroundColor: "rgb(0 0 0 / 0.4)",
         ...props.style,
       }}
     />
@@ -68,6 +69,9 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           zIndex: Number.MAX_SAFE_INTEGER,
+          backgroundColor: "white",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <span id="header">Modal header</span>

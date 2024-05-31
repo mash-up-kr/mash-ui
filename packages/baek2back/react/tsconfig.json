@@ -2,7 +2,8 @@
 	"extends": "@mash-ui/typescript-config/react-library.json",
 	"compilerOptions": {
 		"outDir": "dist",
-		"types": ["vitest/globals"]
+		"types": ["vitest/globals"],
+		"moduleResolution": "Bundler"
 	},
 	"include": ["src", "tsup.config.ts", "vitest.config.ts", "vitest-setup.ts"],
 	"exclude": ["node_modules", "dist"]

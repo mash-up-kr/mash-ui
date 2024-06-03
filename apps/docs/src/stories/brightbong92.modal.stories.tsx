@@ -1,4 +1,4 @@
-import { Modal, type ModalProps } from "@brightbong92/react-ui";
+import { Modal, type ModalProps } from "@mash-ui/react/brightbong92";
 import { useArgs } from "@storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react";
 

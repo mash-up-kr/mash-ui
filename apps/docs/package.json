@@ -12,9 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@baek2back/react-ui": "workspace:*",
-    "@brightbong92/react-ui": "workspace:*",
-    "@polee/react-ui": "workspace:*",
+    "@mash-ui/react": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

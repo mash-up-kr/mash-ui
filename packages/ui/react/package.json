@@ -1,0 +1,57 @@
+{
+  "name": "@mash-ui/react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./baek2back": {
+      "types": "./dist/baek2back/index.d.ts",
+      "import": "./dist/baek2back/index.js",
+      "require": "./dist/baek2back/index.cjs",
+      "default": "./dist/baek2back/index.js"
+    },
+    "./polee": {
+      "types": "./dist/polee/index.d.ts",
+      "import": "./dist/polee/index.js",
+      "require": "./dist/polee/index.cjs",
+      "default": "./dist/polee/index.js"
+    },
+    "./brightbong92": {
+      "types": "./dist/brightbong92/index.d.ts",
+      "import": "./dist/brightbong92/index.js",
+      "require": "./dist/brightbong92/index.cjs",
+      "default": "./dist/brightbong92/index.js"
+    },
+    "./minsgy": {
+      "types": "./dist/minsgy/index.d.ts",
+      "import": "./dist/minsgy/index.js",
+      "require": "./dist/minsgy/index.cjs",
+      "default": "./dist/minsgy/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@mash-ui/typescript-config": "workspace:*",
+    "@mash-ui/tsup-config": "workspace:*",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

@@ -1,4 +1,4 @@
-import { Modal, type ModalProps } from "@baek2back/react-ui";
+import { Modal, type ModalProps } from "@mash-ui/react/baek2back";
 import { useArgs } from "@storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";

@@ -4,7 +4,7 @@ import { options } from "@mash-ui/tsup-config";
 
 const tsupOptions: Options = {
   ...options,
-  name: "@mash-ui/react",
+  name: "@mash-ui/utils",
   external: ["react"],
 };
 

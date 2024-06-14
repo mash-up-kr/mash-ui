@@ -6,42 +6,32 @@ import useOnExit from "./hooks/useOnExit";
 
 export type ModalProps = {
   isOpen: boolean;
+  closeOutsideClick?: boolean;
+  modalIndex: number;
   onClose: () => void;
   onOpen?: () => void;
-  closeOutsideClick?: boolean;
 };
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ isOpen, onClose, onOpen, closeOutsideClick = false, ...props }, ref) => {
-    const modalRef = useRef<HTMLDivElement>();
+  (
+    {
+      closeOutsideClick = false,
+      isOpen,
+      modalIndex,
+      onClose,
+      onOpen,
+      ...props
+    },
+    ref
+  ) => {
+    const modalRef = useRef<HTMLElement>();
 
-    useOnExit({ callback: onClose });
+    useOnExit({ callback: onClose, modalRef });
 
-    if (!isOpen) return null; // Return null when modal is not open
-
-    // Styles for modal background and modal itself
-    const dimmedStyle: React.CSSProperties = {
-      position: "fixed",
-      zIndex: 99,
-      left: 0,
-      top: 0,
-      width: "100%",
-      height: "100%",
-      overflow: "auto",
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-    };
-
-    const modalStyle: React.CSSProperties = {
-      position: "fixed",
-      zIndex: 999,
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      display: "block", // Ensure modal is displayed
-    };
+    if (!isOpen) return null;
 
     return (
-      <Portal id="sunflower">
+      <Portal modalIndex={modalIndex}>
         {/* Modal background dimmed */}
         <div
           data-testid="dimmed"
@@ -55,7 +45,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           role="dialog"
           aria-modal="true"
           aria-labelledby="dialog-title"
-          id="myModal"
+          id={`modal-id-${modalIndex}`}
           style={modalStyle}
           {...props}
         >
@@ -128,3 +118,23 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     );
   }
 );
+
+const dimmedStyle: React.CSSProperties = {
+  position: "fixed",
+  zIndex: 99,
+  left: 0,
+  top: 0,
+  width: "100%",
+  height: "100%",
+  overflow: "auto",
+  backgroundColor: "rgba(0, 0, 0, 0.4)",
+};
+
+const modalStyle: React.CSSProperties = {
+  position: "fixed",
+  zIndex: 999,
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  display: "block",
+};

@@ -43,6 +43,7 @@
   "devDependencies": {
     "@mash-ui/typescript-config": "workspace:*",
     "@mash-ui/tsup-config": "workspace:*",
+    "@mash-ui/utils": "workspace:*",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",

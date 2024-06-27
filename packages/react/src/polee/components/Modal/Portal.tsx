@@ -1,8 +1,8 @@
-import type { ReactNode, RefObject } from "react";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import type { ReactNode, RefObject } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import useIsClient from "../../hooks/useIsClient";
+import useIsClient from '../../hooks/use-is-client';
 
 interface PortalProps {
   id: string;
@@ -25,7 +25,7 @@ function Portal({ id, children, containerRef }: PortalProps) {
       };
     }
 
-    portalElement = document.createElement("div");
+    portalElement = document.createElement('div');
     portalElement.id = id;
     portalElement.style.cssText = `
       position: fixed;

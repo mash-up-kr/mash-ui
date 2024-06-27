@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import useIsClient from "./useIsClient";
+import useIsClient from "./use-is-client";
 
 const useEventListener = <K extends keyof WindowEventMap>(
   eventName: K,

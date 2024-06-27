@@ -1,15 +1,18 @@
-import { Modal, type ModalProps } from "@mash-ui/react/brightbong92";
+import {
+  ModalComponent,
+  type ModalComponentProps,
+} from "@mash-ui/react/brightbong92";
 import { useArgs } from "@storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta<typeof ModalComponent> = {
   title: "Brightbong92/Modal",
-  component: Modal,
+  component: ModalComponent,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof ModalComponent>;
 
 /*
  *👇 Render functions are a framework specific feature to allow you control on how the component renders.
@@ -18,7 +21,7 @@ type Story = StoryObj<typeof Modal>;
  */
 export const Primary: Story = {
   render: (props) => {
-    const [{ isOpen = false }, updateArgs] = useArgs<ModalProps>();
+    const [{ isOpen = false }, updateArgs] = useArgs<ModalComponentProps>();
     return (
       <>
         <button
@@ -28,7 +31,7 @@ export const Primary: Story = {
         >
           Open Modal
         </button>
-        <Modal
+        <ModalComponent
           {...props}
           isOpen={isOpen}
           onClose={() => {

@@ -1,153 +1,136 @@
-import type { CSSProperties, ForwardedRef, ReactNode, RefObject } from "react";
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-} from "react";
-
-import { mergeRefs } from "@mash-ui/utils";
 import type {
-  CustomAnimation,
-  EnterAnimation,
-  ExitAnimation,
-} from "../../hooks/useAnimation";
-import useAnimation from "../../hooks/useAnimation";
-import useEventListener from "../../hooks/useEventListener";
-import Portal from "./Portal";
+  CSSProperties,
+  ComponentPropsWithoutRef,
+  ForwardedRef,
+  ReactNode,
+  RefObject,
+} from 'react';
+import { forwardRef, useEffect, useId, useMemo, useRef } from 'react';
+
+import { mergeRefs } from '@mash-ui/utils';
+import { useClickOutside } from '../../hooks/use-click-outside';
+import useEventListener from '../../hooks/use-event-listener';
+import useModalTransition from '../../hooks/use-modal-transition';
+import Portal from './Portal';
 
 export interface ModalProps {
   children: ReactNode;
   onClose: VoidFunction;
   isOpen: boolean;
-  dim?: boolean;
-  dimStyle?: CSSProperties;
   shouldCloseOnDimClick?: boolean;
-  enterAnimation?: EnterAnimation;
-  exitAnimation?: ExitAnimation;
+  initial?: CSSProperties;
+  animate?: CSSProperties;
+  exit?: CSSProperties;
   preventBackgroundScroll?: boolean;
   shouldCloseOnEsc?: boolean;
-  animationDuration?: string | number;
-  slideAnimationDistance?: string;
   mountNode?: RefObject<HTMLElement>;
-  customAnimations?: {
-    enter?: CustomAnimation;
-    exit?: CustomAnimation;
-  };
   ariaLabelledby?: string;
   ariaDescribedby?: string;
 }
 
-const getDimStyle = (dimStyle?: CSSProperties): CSSProperties => ({
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  zIndex: -1,
-  ...dimStyle,
-});
-
-const Modal = forwardRef(
-  (props: ModalProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const {
-      children,
-      onClose,
-      dimStyle,
-      isOpen,
-      enterAnimation,
-      exitAnimation,
-      animationDuration,
-      slideAnimationDistance,
-      customAnimations,
-      ariaLabelledby,
-      ariaDescribedby,
-      mountNode,
-      dim = true,
-      preventBackgroundScroll = true,
-      shouldCloseOnDimClick = true,
-      shouldCloseOnEsc = true,
-    } = props;
-    const modalRef = useRef<HTMLDivElement>(null);
-
-    const portalId = useId();
-
-    useEventListener("keydown", (event: KeyboardEvent) => {
-      if (shouldCloseOnEsc && event.key === "Escape") {
-        onClose();
-      }
-    });
-
-    useAnimation({
-      ref: modalRef,
-      enterAnimation: customAnimations?.enter ? "custom-enter" : enterAnimation,
-      exitAnimation: customAnimations?.exit ? "custom-exit" : exitAnimation,
-      animationDuration,
-      slideAnimationDistance,
-      customAnimations,
-    });
-
-    useEffect(() => {
-      if (preventBackgroundScroll && isOpen) {
-        document.body.style.overflow = "hidden";
-      }
-
-      return () => {
-        if (preventBackgroundScroll) {
-          document.body.style.overflow = "";
-        }
-      };
-    }, [preventBackgroundScroll, isOpen]);
-
-    const handleDimClick = useCallback(() => {
-      if (shouldCloseOnDimClick) {
-        onClose();
-      }
-    }, [onClose, shouldCloseOnDimClick]);
-
-    const mergedDimStyle = useMemo(() => getDimStyle(dimStyle), [dimStyle]);
-
-    const modalStyle = useMemo(() => {
-      const styles: CSSProperties = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "fixed",
+const Backdrop = (props: ComponentPropsWithoutRef<'div'>) => {
+  return (
+    <div
+      {...props}
+      style={{
+        position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: 9996,
-      };
-      return styles;
-    }, []);
+        zIndex: 9995,
+        backgroundColor: 'rgb(0 0 0 / 0.4)',
+        ...props.style,
+      }}
+    />
+  );
+};
 
-    if (!isOpen) {
-      return null;
+const Modal = forwardRef((props: ModalProps, ref: ForwardedRef<HTMLDivElement>) => {
+  const {
+    children,
+    onClose,
+    isOpen,
+    initial,
+    animate,
+    exit,
+    ariaLabelledby,
+    ariaDescribedby,
+    mountNode,
+    preventBackgroundScroll = true,
+    shouldCloseOnDimClick = true,
+    shouldCloseOnEsc = true,
+  } = props;
+  const portalId = useId();
+  const modalRef = useRef<HTMLDivElement>(null);
+  const { state, styles } = useModalTransition(isOpen, initial, animate, exit);
+
+  useEventListener('keydown', (event: KeyboardEvent) => {
+    if (shouldCloseOnEsc && event.key === 'Escape') {
+      onClose();
+    }
+  });
+
+  useEffect(() => {
+    if (preventBackgroundScroll && state !== 'unmounted') {
+      document.body.style.overflow = 'hidden';
     }
 
-    return (
-      <Portal id={portalId} containerRef={mountNode}>
-        <div
-          ref={mergeRefs([modalRef, ref])}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-          aria-labelledby={ariaLabelledby}
-          aria-describedby={ariaDescribedby}
-          style={modalStyle}
-        >
-          {dim && <div style={mergedDimStyle} onClick={handleDimClick} />}
-          {children}
-        </div>
-      </Portal>
-    );
-  }
-);
+    return () => {
+      if (preventBackgroundScroll) {
+        document.body.style.overflow = '';
+      }
+    };
+  }, [preventBackgroundScroll, state]);
 
-Modal.displayName = "Modal";
+  const modalStyle = useMemo(() => {
+    const styles: CSSProperties = {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 9996,
+    };
+    return styles;
+  }, []);
+
+  useClickOutside(
+    modalRef,
+    () => {
+      if (shouldCloseOnDimClick) {
+        onClose();
+      }
+    },
+    { event: 'pointerdown' }
+  );
+
+  if (!isOpen && state === 'unmounted') {
+    return null;
+  }
+
+  return (
+    <Portal id={portalId} containerRef={mountNode}>
+      <Backdrop />
+
+      <div
+        ref={mergeRefs([modalRef, ref])}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
+        aria-labelledby={ariaLabelledby}
+        aria-describedby={ariaDescribedby}
+        style={{ ...modalStyle, ...styles }}
+      >
+        {children}
+      </div>
+    </Portal>
+  );
+});
+
+Modal.displayName = 'Modal';
 
 export default Modal;

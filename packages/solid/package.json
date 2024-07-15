@@ -1,0 +1,33 @@
+{
+  "name": "@mash-ui/solid",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "sideEffect": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@mash-ui/typescript-config": "workspace:*",
+    "@mash-ui/tsup-config": "workspace:*",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3",
+    "solid-js": "1.8.18"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

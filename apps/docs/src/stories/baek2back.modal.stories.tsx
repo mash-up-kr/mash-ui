@@ -1,5 +1,4 @@
-import { Modal, type ModalProps } from "@mash-ui/react/baek2back";
-import { useArgs } from "@storybook/preview-api";
+import { Modal, ModalManager } from "@mash-ui/react/baek2back";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
@@ -20,29 +19,40 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    isOpen: false,
+    isOpen: true,
   },
-  render: function Render(args) {
-    const [{ isOpen }, updateArgs] = useArgs<ModalProps>();
+  render: function Render() {
+    const DefaultModal = ModalManager.create(() => {
+      const modal = ModalManager.useModal();
+
+      return (
+        <Modal
+          isOpen={modal.visible}
+          onOpenChange={(value) => {
+            if (!value) {
+              setTimeout(() => {
+                modal.resolve();
+                modal.hide();
+              }, 1000);
+            }
+          }}
+        />
+      );
+    });
 
     return (
-      <>
+      <ModalManager.Provider>
         <button
           type="button"
           onClick={() => {
-            updateArgs({ isOpen: !isOpen });
+            ModalManager.show(DefaultModal).then(() => {
+              alert("1초 후 닫힘!");
+            });
           }}
         >
           Open
         </button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onOpenChange={(isOpen) => {
-            updateArgs({ isOpen });
-          }}
-        />
-      </>
+      </ModalManager.Provider>
     );
   },
 };

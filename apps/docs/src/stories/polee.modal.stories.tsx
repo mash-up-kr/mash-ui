@@ -1,78 +1,50 @@
-import { Modal, type ModalProps } from "@mash-ui/react/polee";
-import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { useState } from "react";
+import { Modal, type ModalProps } from '@mash-ui/react/polee';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { useState } from 'react';
 
 const meta: Meta<typeof Modal> = {
-  title: "polee/Modal",
+  title: 'polee/Modal',
   component: Modal,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     isOpen: {
       table: {
-        control: "boolean",
-        description: "모달의 열림/닫힘 상태를 제어",
+        control: 'boolean',
+        description: '모달의 열림/닫힘 상태를 제어',
       },
     },
     shouldCloseOnEsc: {
       table: {
-        control: "boolean",
-        description: "ESC 키를 누르면 모달 닫히는 여부",
+        control: 'boolean',
+        description: 'ESC 키를 누르면 모달 닫히는 여부',
       },
     },
     shouldCloseOnDimClick: {
       table: {
-        control: "boolean",
-        description: "모달 외부를 클릭하면 모달을 닫히는 여부",
+        control: 'boolean',
+        description: '모달 외부를 클릭하면 모달을 닫히는 여부',
       },
     },
     preventBackgroundScroll: {
       table: {
-        control: "boolean",
-        description: "모달이 열려 있을 때 배경 스크롤을 방지",
-      },
-    },
-    enterAnimation: {
-      table: {
-        control: "inline-radio",
-        options: [
-          "fade-in",
-          "slide-up",
-          "slide-down",
-          "fade-in-slide-up",
-          "fade-in-slide-down",
-          "custom-enter",
-        ],
-        description: "모달 열기 애니메이션 CSS 클래스",
-      },
-    },
-    exitAnimation: {
-      table: {
-        control: "inline-radio",
-        options: [
-          "fade-out",
-          "slide-up",
-          "slide-down",
-          "fade-out-slide-up",
-          "fade-out-slide-down",
-          "custom-exit",
-        ],
-        description: "모달 닫기 애니메이션 CSS 클래스",
+        control: 'boolean',
+        description: '모달이 열려 있을 때 배경 스크롤을 방지',
       },
     },
     ariaLabelledby: {
       table: {
-        control: "text",
-        description: "모달의 라벨 요소 ID",
+        control: 'text',
+        description: '모달의 라벨 요소 ID',
       },
     },
     ariaDescribedby: {
       table: {
-        control: "text",
-        description: "모달의 설명 요소 ID",
+        control: 'text',
+        description: '모달의 설명 요소 ID',
       },
     },
   },
@@ -96,7 +68,7 @@ const Template = (args: ModalProps) => {
       <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
             borderRadius: 8,
             width: 300,
             height: 300,
@@ -140,7 +112,7 @@ export const NoDimClickClose: Story = {
 export const WithCustomMountPoint: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    const mountNode = document.createElement("div");
+    const mountNode = document.createElement('div');
     document.body.appendChild(mountNode);
 
     return (
@@ -148,14 +120,10 @@ export const WithCustomMountPoint: Story = {
         <button type="button" onClick={() => setIsOpen(true)}>
           Open Modal
         </button>
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          mountNode={{ current: mountNode }}
-        >
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} mountNode={{ current: mountNode }}>
           <div
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               borderRadius: 8,
               width: 300,
               height: 300,
@@ -185,7 +153,7 @@ export const CustomAriaLabels: Story = {
   render: (args) => <Template {...args} />,
   args: {
     isOpen: false,
-    ariaLabelledby: "custom-title",
-    ariaDescribedby: "custom-description",
+    ariaLabelledby: 'custom-title',
+    ariaDescribedby: 'custom-description',
   },
 };

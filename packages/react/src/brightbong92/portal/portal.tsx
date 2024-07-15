@@ -6,15 +6,21 @@ interface PortalProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
+  modalIndex: number;
 }
 
-const Portal = ({ id, className, children }: PortalProps): JSX.Element => {
+const Portal = ({
+  id,
+  className,
+  children,
+  modalIndex,
+}: PortalProps): JSX.Element => {
   const elRef = useRef<HTMLDivElement | null>(null);
 
   if (!elRef.current) {
     elRef.current = document.createElement("div");
-    elRef.current.setAttribute("id", id ?? "root-modal");
-    elRef.current.setAttribute("class", className ?? "root-modal");
+    elRef.current.setAttribute("id", `root-modal-${modalIndex}`);
+    elRef.current.setAttribute("class", `root-modal-${modalIndex}`);
   }
 
   useEffect(() => {

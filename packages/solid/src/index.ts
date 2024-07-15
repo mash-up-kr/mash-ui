@@ -1,1 +1,2 @@
-export { default } from "./toast";
+export * from "./modal";
+export * from "./toast";

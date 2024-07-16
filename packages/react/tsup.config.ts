@@ -1,4 +1,4 @@
-import { defineConfig, type Options } from "tsup";
+import { type Options, defineConfig } from "tsup";
 
 import { options } from "@mash-ui/tsup-config";
 
@@ -7,10 +7,11 @@ const tsupOptions: Options = {
   name: "@mash-ui/react",
   external: ["react"],
   entry: [
-    "src/baek2back/index.ts",
-    "src/brightbong92/index.ts",
-    "src/polee/index.ts",
-    "src/minsgy/index.ts",
+    // "src/baek2back/index.ts",
+    // "src/brightbong92/index.ts",
+    // "src/polee/index.ts",
+    // "src/minsgy/index.ts",
+    "src/index.ts",
   ],
 };
 

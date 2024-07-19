@@ -1,7 +1,8 @@
 import type React from "react";
-import { useRef } from "react";
-import { useModalManager } from "./hooks/useModal";
+import { useRef, useSyncExternalStore } from "react";
+import { useModalManager } from "./hooks/useModalManager";
 import { Modal } from "./modal";
+import { modalManager } from "./modal-manager";
 
 export type ModalComponentProps = {
   isOpen: boolean;
@@ -13,7 +14,13 @@ export type ModalComponentProps = {
 export const ModalComponent: React.FC<ModalComponentProps> = (props) => {
   const { isOpen } = props;
   const modalRef = useRef<HTMLDivElement>(null);
-  const modalIndex = useModalManager(modalRef, isOpen);
+  const { index } = useModalManager(modalRef, isOpen);
 
-  return <Modal ref={modalRef} modalIndex={modalIndex} {...props} />;
+  useSyncExternalStore(
+    modalManager.subscribe.bind(modalManager),
+    modalManager.getSnapshot.bind(modalManager),
+    modalManager.getSnapshot.bind(modalManager)
+  );
+
+  return <Modal ref={modalRef} modalIndex={index} {...props} />;
 };

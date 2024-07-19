@@ -24,10 +24,10 @@ export class ModalManager {
     return this.modals.get(modal) === this.modals.size;
   }
 
-  subscribe(listner: () => void) {
-    this.listeners = [...this.listeners, listner];
+  subscribe(listener: () => void) {
+    this.listeners = [...this.listeners, listener];
     return () => {
-      this.listeners = this.listeners.filter((l) => l !== listner);
+      this.listeners = this.listeners.filter((l) => l !== listener);
     };
   }
 
@@ -36,8 +36,8 @@ export class ModalManager {
   }
 
   emitChange() {
-    for (const listner of this.listeners) {
-      listner();
+    for (const listener of this.listeners) {
+      listener();
     }
   }
 }

@@ -23,5 +23,7 @@ export function useModalManager(ref: RefObject<HTMLElement>, isOpen?: boolean) {
     };
   }, [isOpen, ref]);
 
-  return index;
+  return {
+    index,
+  };
 }

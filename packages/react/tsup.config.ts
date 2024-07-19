@@ -7,10 +7,10 @@ const tsupOptions: Options = {
   name: "@mash-ui/react",
   external: ["react"],
   entry: [
-    // "src/baek2back/index.ts",
-    // "src/brightbong92/index.ts",
-    // "src/polee/index.ts",
-    // "src/minsgy/index.ts",
+    "src/baek2back/index.ts",
+    "src/brightbong92/index.ts",
+    "src/polee/index.ts",
+    "src/minsgy/index.ts",
     "src/index.ts",
   ],
 };

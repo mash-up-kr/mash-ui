@@ -1,12 +1,12 @@
 import { type MutableRefObject, useEffect } from "react";
 import { modalManager } from "../utils/modal-manager";
 
-interface UseOnExitProps {
+interface UseOnEscProps {
   callback: () => void;
   modalRef?: MutableRefObject<HTMLElement> | any;
 }
 
-const useOnExit = ({ callback, modalRef }: UseOnExitProps) => {
+const useOnEsc = ({ callback, modalRef }: UseOnEscProps) => {
   useEffect(() => {
     const onEsc = (ev: KeyboardEvent) => {
       if (ev.key === "Escape" && modalManager.isTopModal(modalRef.current)) {
@@ -21,4 +21,4 @@ const useOnExit = ({ callback, modalRef }: UseOnExitProps) => {
   return;
 };
 
-export default useOnExit;
+export default useOnEsc;

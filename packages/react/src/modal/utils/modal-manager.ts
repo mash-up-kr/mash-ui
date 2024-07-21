@@ -1,9 +1,11 @@
 export class ModalManager {
   private modals: Map<HTMLElement, number>;
   private listeners: Array<() => void>;
+  closeOnOverlayClick?: boolean;
 
   constructor() {
     this.modals = new Map();
+    this.closeOnOverlayClick = true;
     this.listeners = [];
   }
 
@@ -24,6 +26,11 @@ export class ModalManager {
     return this.modals.get(modal) === this.modals.size;
   }
 
+  setCloseOnOverlayClick(value: boolean) {
+    this.closeOnOverlayClick = value;
+    this.emitChange();
+  }
+
   subscribe(listener: () => void) {
     this.listeners = [...this.listeners, listener];
     return () => {
@@ -33,6 +40,10 @@ export class ModalManager {
 
   getSnapshot() {
     return this.modals;
+  }
+
+  getCloseOnOverlayClickSnapshot() {
+    return this.closeOnOverlayClick;
   }
 
   emitChange() {

@@ -1,27 +1,41 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { modalManager } from "../utils/modal-manager";
 import useModalManager from "./use-modal-manager";
 
 export interface IUseModalProps {
   isOpen?: boolean;
+  closeOnOverlayClick?: boolean;
 }
 
-const useModal = ({ isOpen }: IUseModalProps) => {
-  const [isVisible, setIsVisible] = useState(isOpen);
-  const modalRef = useRef<HTMLDivElement | null>(null);
+const useModal = ({ isOpen, closeOnOverlayClick }: IUseModalProps) => {
+  const modals = useSyncExternalStore(
+    modalManager.subscribe.bind(modalManager),
+    modalManager.getSnapshot.bind(modalManager),
+  );
 
-  const { index } = useModalManager(modalRef, isVisible);
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(isOpen);
+
+  const { index } = useModalManager({
+    ref: modalRef,
+    isOpen: isVisible,
+    closeOnOverlayClick,
+  });
 
   const show = () => {
     setIsVisible(true);
   };
+
   const hide = () => {
     setIsVisible(false);
   };
 
   useEffect(() => {
+    console.log("isOpen", isOpen);
+
     if (isOpen) {
       show();
-    } else {
+    } else if (isOpen === false) {
       hide();
     }
   }, [isOpen]);
@@ -30,6 +44,9 @@ const useModal = ({ isOpen }: IUseModalProps) => {
     index,
     modalRef,
     isVisible,
+    modals,
+    closeOnOverlayClick,
+    setIsVisible,
     show,
     hide,
   };

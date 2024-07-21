@@ -35,7 +35,11 @@ export const Primary: Story = {
 
     const Modal2 = () => {
       return (
-        <Modal isOpen={isVisible2} onClose={hideModal2}>
+        <Modal
+          isOpen={isVisible2}
+          onClose={hideModal2}
+          closeOnOverlayClick={false}
+        >
           <div>modal children2</div>
           <button type="button" onClick={hideModal2}>
             close
@@ -74,7 +78,7 @@ export const Primary: Story = {
         >
           Open Modal1
         </button>
-        <Modal isOpen={isVisible1} onClose={hideModal1}>
+        <Modal isOpen={isVisible1} onClose={hideModal1} closeOnOverlayClick>
           <Modal.Overlay />
 
           <Modal.Container>

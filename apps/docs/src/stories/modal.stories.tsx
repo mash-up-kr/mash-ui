@@ -75,10 +75,26 @@ export const Primary: Story = {
           Open Modal1
         </button>
         <Modal isOpen={isVisible1} onClose={hideModal1}>
-          <div>modal children1</div>
-          <button type="button" onClick={hideModal1}>
-            close
-          </button>
+          <Modal.Overlay />
+
+          <Modal.Container>
+            <Modal.Header>
+              <Modal.Title title="modal title" onClickClose={hideModal1} />
+            </Modal.Header>
+
+            <Modal.Body>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perspiciatis, omnis corrupti. Ducimus quos repellendus est nemo
+              tempora expedita ex aliquid nulla maiores, voluptatibus optio
+              quibusdam provident animi sequi illo libero.
+            </Modal.Body>
+
+            <Modal.Footer>
+              <button type="button" onClick={hideModal1}>
+                close
+              </button>
+            </Modal.Footer>
+          </Modal.Container>
         </Modal>
 
         <button

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useModalManager from "./useModalManager";
+import useModalManager from "./use-modal-manager";
 
 export interface IUseModalProps {
   isOpen?: boolean;

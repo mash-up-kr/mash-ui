@@ -1,15 +1,15 @@
 import type React from "react";
 import { forwardRef } from "react";
-import useModal from "../hooks/useModal";
-import useOnExit from "../hooks/useOnExit";
+import useModal from "../hooks/use-modal";
+import useOnExit from "../hooks/use-on-exit";
 import { mergeRefs } from "../utils/mergeRefs";
-import Backdrop from "./Backdrop";
-import ModalBody from "./ModalBody";
-import ModalContainer from "./ModalContainer";
-import ModalFooter from "./ModalFooter";
-import ModalHeader from "./ModalHeader";
-import ModalTitle from "./ModalTitle";
-import Portal from "./Portal";
+import Backdrop from "./back-drop";
+import ModalBody from "./modal-body";
+import ModalContainer from "./modal-container";
+import ModalFooter from "./modal-footer";
+import ModalHeader from "./modal-header";
+import ModalTitle from "./modal-title";
+import Portal from "./portal";
 
 export interface IModalProps {
   isOpen?: boolean;
@@ -54,6 +54,7 @@ export default Object.assign(Modal, {
 });
 
 const modalDefaultStyle: React.CSSProperties = {
+  position: "fixed",
   zIndex: Number.MAX_SAFE_INTEGER,
 };
 

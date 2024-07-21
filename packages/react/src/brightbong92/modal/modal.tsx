@@ -32,11 +32,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <Portal modalIndex={modalIndex}>
         {/* Modal background dimmed */}
-        {/* 
+
         <div
           style={dimmedStyle}
           onClick={closeOutsideClick ? onClose : undefined}
-        /> */}
+        />
 
         <div
           ref={mergeRefs([modalRef, ref])}

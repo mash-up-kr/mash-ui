@@ -1,5 +1,5 @@
 import { type MutableRefObject, useEffect } from "react";
-import { modalManager } from "../modal-manager";
+import { modalManager } from "../utils/modal-manager";
 
 interface UseOnExitProps {
   callback: () => void;

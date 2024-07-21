@@ -4,7 +4,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { modalManager } from "../modal-manager";
+import { modalManager } from "../utils/modal-manager";
 
 const useModalManager = (ref: RefObject<HTMLElement>, isOpen?: boolean) => {
   const [index, setIndex] = useState(0);

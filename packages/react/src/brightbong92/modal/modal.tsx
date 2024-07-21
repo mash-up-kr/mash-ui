@@ -1,8 +1,6 @@
-"use client";
 import { mergeRefs } from "@mash-ui/utils";
 import { forwardRef, useRef } from "react";
 import Portal from "../portal/portal";
-import ModalTitle from "./components/ModalTitle";
 import useOnExit from "./hooks/useOnExit";
 
 export type ModalProps = {
@@ -34,11 +32,11 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <Portal modalIndex={modalIndex}>
         {/* Modal background dimmed */}
-
+        {/* 
         <div
           style={dimmedStyle}
           onClick={closeOutsideClick ? onClose : undefined}
-        />
+        /> */}
 
         <div
           ref={mergeRefs([modalRef, ref])}
@@ -72,8 +70,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   alignItems: "center",
                 }}
               >
-                <ModalTitle onClickClose={onClose} title="모달" />
-                {/* <h2 id="dialog-title">Modal Title</h2>
+                <h2 id="dialog-title">Modal Title</h2>
                 <span
                   className="close"
                   data-testid="closeBtn"
@@ -86,7 +83,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   onClick={onClose}
                 >
                   &times;
-                </span> */}
+                </span>
               </div>
 
               {/* Modal body */}
@@ -109,7 +106,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   justifyContent: "flex-end",
                 }}
               >
-                <button role="button" onClick={onClose}>
+                <button type="button" role="button" onClick={onClose}>
                   Close
                 </button>
               </div>

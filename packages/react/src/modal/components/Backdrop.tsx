@@ -1,23 +1,23 @@
 import type React from "react";
 
 /**
- * @description overlay
+ * @description backdrop
  * @returns
  */
 
-export interface IOverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IBackdropProps extends React.HTMLAttributes<HTMLDivElement> {
   closeOutsideClick?: boolean;
   onClose?: () => void;
 }
 
-const Overlay = ({
+const Backdrop = ({
   closeOutsideClick = false,
   onClose,
   ...props
-}: IOverlayProps) => {
+}: IBackdropProps) => {
   return (
     <div
-      className="modal-overlay"
+      className="modal-backdrop"
       onClick={closeOutsideClick ? onClose : undefined}
       style={defaultStyle}
       {...props}
@@ -25,7 +25,7 @@ const Overlay = ({
   );
 };
 
-export default Overlay;
+export default Backdrop;
 
 const defaultStyle: React.CSSProperties = {
   position: "fixed",

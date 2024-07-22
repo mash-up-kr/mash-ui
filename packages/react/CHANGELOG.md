@@ -1,5 +1,11 @@
 # @mash-ui/react
 
+## 0.1.1
+
+### Patch Changes
+
+- 313a8bd: package rebuild
+
 ## 0.1.0
 
 ### Minor Changes

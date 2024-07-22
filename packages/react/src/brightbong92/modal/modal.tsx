@@ -1,4 +1,3 @@
-"use client";
 import { mergeRefs } from "@mash-ui/utils";
 import { forwardRef, useRef } from "react";
 import Portal from "../portal/portal";
@@ -33,9 +32,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <Portal modalIndex={modalIndex}>
         {/* Modal background dimmed */}
+
         <div
-          data-testid="dimmed"
-          className={"dimmed show"}
           style={dimmedStyle}
           onClick={closeOutsideClick ? onClose : undefined}
         />
@@ -50,6 +48,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {...props}
         >
           {/* Modal content */}
+
           {isOpen && (
             <div
               className="modal-content"
@@ -107,7 +106,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   justifyContent: "flex-end",
                 }}
               >
-                <button role="button" onClick={onClose}>
+                <button type="button" role="button" onClick={onClose}>
                   Close
                 </button>
               </div>

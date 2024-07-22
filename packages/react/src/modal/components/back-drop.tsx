@@ -1,30 +1,24 @@
 import type React from "react";
 import { useSyncExternalStore } from "react";
-import useModal from "../hooks/use-modal";
 import { modalManager } from "../utils/modal-manager";
 import { useModalContext } from "./modal";
 
 export interface IBackdropProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Backdrop = ({ ...props }: IBackdropProps) => {
-  const { modals } = useModal({});
-
   const closeOnOverlayClick = useSyncExternalStore(
     modalManager.subscribe.bind(modalManager),
     modalManager.getCloseOnOverlayClickSnapshot.bind(modalManager)
   );
 
-  const { hide, setIsVisible } = useModalContext();
+  const { isVisible, onClose } = useModalContext();
 
   const closeModal = () => {
-    console.log("closeOnOverlayClick", closeOnOverlayClick);
-
-    setIsVisible(false);
-    // hide();
+    onClose();
   };
 
   return (
-    <>
+    isVisible && (
       <div
         className="modal-backdrop"
         style={defaultStyle}
@@ -33,7 +27,7 @@ const Backdrop = ({ ...props }: IBackdropProps) => {
           closeOnOverlayClick ? closeModal() : null;
         }}
       />
-    </>
+    )
   );
 };
 

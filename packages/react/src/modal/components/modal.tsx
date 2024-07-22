@@ -12,10 +12,8 @@ import ModalTitle from "./modal-title";
 import Portal from "./portal";
 
 interface ModalContextProps {
-  isVisible: boolean;
-  show: () => void;
-  hide: () => void;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isVisible?: boolean;
+  onClose: () => void;
 }
 
 export interface IModalProps {
@@ -50,38 +48,36 @@ const Modal = forwardRef<HTMLDivElement, IModalProps>(
       closeOnEsc = true,
       ...props
     },
-    ref,
+    ref
   ) => {
-    const { isVisible, modalRef, index, show, hide, setIsVisible } = useModal({
+    const { isVisible, modalRef, index } = useModal({
       isOpen,
       closeOnOverlayClick,
     });
 
-    closeOnEsc && useOnEsc({ callback: onClose, modalRef });
+    closeOnEsc && useOnEsc({ isOpen, modalRef, callback: onClose });
 
-    // Ensure `setIsVisible` is correctly set
-    console.log("Modal isVisible:", isVisible);
-    if (!isVisible) return null;
+    if (!isOpen) return null;
 
     return (
-      <Portal>
-        <ModalContext.Provider
-          value={{ isVisible: isOpen, show, hide, setIsVisible }}
-        >
-          <div
-            ref={mergeRefs([ref, modalRef])}
-            role="dialog"
-            aria-modal="true"
-            id={`modal-id-${index}`}
-            style={modalDefaultStyle}
-            {...props}
-          >
-            {children}
-          </div>
-        </ModalContext.Provider>
-      </Portal>
+      isOpen && (
+        <Portal>
+          <ModalContext.Provider value={{ isVisible, onClose }}>
+            <div
+              ref={mergeRefs([ref, modalRef])}
+              role="dialog"
+              aria-modal="true"
+              id={`modal-id-${index}`}
+              style={modalDefaultStyle}
+              {...props}
+            >
+              {children}
+            </div>
+          </ModalContext.Provider>
+        </Portal>
+      )
     );
-  },
+  }
 );
 
 export default Object.assign(Modal, {
@@ -95,9 +91,5 @@ export default Object.assign(Modal, {
 
 const modalDefaultStyle: React.CSSProperties = {
   position: "fixed",
-  zIndex: Number.MAX_SAFE_INTEGER,
-};
-
-const backdropDefaultStyle: React.CSSProperties = {
   zIndex: Number.MAX_SAFE_INTEGER,
 };

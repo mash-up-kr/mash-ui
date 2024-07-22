@@ -2,13 +2,15 @@ import { type MutableRefObject, useEffect } from "react";
 import { modalManager } from "../utils/modal-manager";
 
 interface UseOnEscProps {
+  isOpen: boolean;
   callback: () => void;
   modalRef?: MutableRefObject<HTMLElement> | any;
 }
 
-const useOnEsc = ({ callback, modalRef }: UseOnEscProps) => {
+const useOnEsc = ({ isOpen, callback, modalRef }: UseOnEscProps) => {
   useEffect(() => {
     const onEsc = (ev: KeyboardEvent) => {
+      if (!isOpen) return;
       if (ev.key === "Escape" && modalManager.isTopModal(modalRef.current)) {
         callback();
       }
@@ -17,7 +19,8 @@ const useOnEsc = ({ callback, modalRef }: UseOnEscProps) => {
     return () => {
       window.removeEventListener("keydown", onEsc);
     };
-  }, []);
+  }, [isOpen]);
+
   return;
 };
 

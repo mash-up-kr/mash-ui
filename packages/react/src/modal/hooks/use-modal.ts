@@ -31,13 +31,8 @@ const useModal = ({ isOpen, closeOnOverlayClick }: IUseModalProps) => {
   };
 
   useEffect(() => {
-    console.log("isOpen", isOpen);
-
-    if (isOpen) {
-      show();
-    } else if (isOpen === false) {
-      hide();
-    }
+    if (isOpen) show();
+    else hide();
   }, [isOpen]);
 
   return {

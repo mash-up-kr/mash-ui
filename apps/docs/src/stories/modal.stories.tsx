@@ -33,37 +33,88 @@ export const Primary: Story = {
       hide: hideModal2,
     } = useModal({});
 
+    const ModalContainer = ({ children }: { children: React.ReactNode }) => {
+      return <Modal.Container>{children}</Modal.Container>;
+    };
+
+    const ModalBody = () => {
+      return (
+        <Modal.Body>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
+          omnis corrupti. Ducimus quos repellendus est nemo tempora expedita ex
+          aliquid nulla maiores, voluptatibus optio quibusdam provident animi
+          sequi illo libero.
+        </Modal.Body>
+      );
+    };
+
+    const Modal1 = () => {
+      return (
+        <Modal
+          isOpen={isVisible1}
+          onClose={hideModal1}
+          closeOnOverlayClick={false}
+        >
+          <Modal.Overlay />
+          <ModalContainer>
+            <Modal.Header>
+              <Modal.Title title="modal title" onClickClose={hideModal1} />
+            </Modal.Header>
+            <ModalBody />
+            <Modal.Footer>
+              <button type="button" onClick={hideModal1}>
+                close
+              </button>
+            </Modal.Footer>
+          </ModalContainer>
+        </Modal>
+      );
+    };
+
     const Modal2 = () => {
       return (
         <Modal
           isOpen={isVisible2}
           onClose={hideModal2}
-          closeOnOverlayClick={false}
+          closeOnOverlayClick={true}
         >
-          <div>modal children2</div>
-          <button type="button" onClick={hideModal2}>
-            close
-          </button>
+          <Modal.Overlay />
+          <ModalContainer>
+            <ModalBody />
+            <button type="button" onClick={hideModal2}>
+              close
+            </button>
+          </ModalContainer>
         </Modal>
       );
     };
     const Modal3 = () => {
       return (
-        <Modal isOpen={isOpen3} onClose={() => setIsOpen3(false)}>
-          <div>modal children3</div>
-          <button type="button" onClick={() => setIsOpen3(false)}>
-            close
-          </button>
+        <Modal isOpen={isOpen3} onClose={() => setIsOpen3(false)} closeOnEsc>
+          <Modal.Overlay />
+          <ModalContainer>
+            <ModalBody />
+            <button type="button" onClick={() => setIsOpen3(false)}>
+              close
+            </button>
+          </ModalContainer>
         </Modal>
       );
     };
     const Modal4 = () => {
       return (
-        <Modal isOpen={isOpen4} onClose={() => setIsOpen4(false)}>
-          <div>modal children4</div>
-          <button type="button" onClick={() => setIsOpen4(false)}>
-            close
-          </button>
+        <Modal
+          isOpen={isOpen4}
+          onClose={() => setIsOpen4(false)}
+          closeOnEsc={false}
+        >
+          <Modal.Overlay />
+          <ModalContainer>
+            <ModalBody />
+            <button type="button" onClick={() => setIsOpen4(false)}>
+              close
+            </button>
+          </ModalContainer>
         </Modal>
       );
     };
@@ -76,30 +127,9 @@ export const Primary: Story = {
             showModal1();
           }}
         >
-          Open Modal1
+          click out side off
         </button>
-        <Modal isOpen={isVisible1} onClose={hideModal1} closeOnOverlayClick>
-          <Modal.Overlay />
-
-          <Modal.Container>
-            <Modal.Header>
-              <Modal.Title title="modal title" onClickClose={hideModal1} />
-            </Modal.Header>
-
-            <Modal.Body>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis, omnis corrupti. Ducimus quos repellendus est nemo
-              tempora expedita ex aliquid nulla maiores, voluptatibus optio
-              quibusdam provident animi sequi illo libero.
-            </Modal.Body>
-
-            <Modal.Footer>
-              <button type="button" onClick={hideModal1}>
-                close
-              </button>
-            </Modal.Footer>
-          </Modal.Container>
-        </Modal>
+        {Modal1()}
 
         <button
           type="button"
@@ -107,7 +137,7 @@ export const Primary: Story = {
             showModal2();
           }}
         >
-          Open Modal2
+          click out side on
         </button>
         {Modal2()}
 
@@ -117,7 +147,7 @@ export const Primary: Story = {
             setIsOpen3(true);
           }}
         >
-          Open Modal3
+          click on esc on
         </button>
         {Modal3()}
 
@@ -127,7 +157,7 @@ export const Primary: Story = {
             setIsOpen4(true);
           }}
         >
-          Open Modal4
+          click on esc off
         </button>
         {Modal4()}
       </>

@@ -1,5 +1,13 @@
 # docs
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [5c7c4a9]
+- Updated dependencies [43acfe2]
+  - @mash-ui/react@0.1.0
+
 ## 0.0.1
 
 ### Patch Changes

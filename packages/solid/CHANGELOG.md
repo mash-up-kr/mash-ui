@@ -1,5 +1,11 @@
 # @mash-ui/solid
 
+## 1.0.3
+
+### Patch Changes
+
+- 7beaf38: add solid declarative modal
+
 ## 1.0.2
 
 ### Patch Changes

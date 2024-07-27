@@ -17,6 +17,11 @@
     "dev": "tsup --watch",
     "test": "vitest run"
   },
+  "dependencies": {
+    "@solid-primitives/props": "3.1.11",
+    "@solid-primitives/refs": "1.0.8",
+    "@solid-primitives/presence": "0.0.6"
+  },
   "devDependencies": {
     "@mash-ui/typescript-config": "workspace:*",
     "@mash-ui/tsup-config": "workspace:*",
